@@ -22,8 +22,8 @@ return {
       },
     })
 
-    -- rust_analyzer is not installed via mason, so mason-lspconfig will not
-    -- auto-enable it: enable it here (it must be on PATH).
+    -- rust_analyzer is not installed via mason,
+    -- requires `rustup component add rust-analyzer`
     vim.lsp.enable("rust_analyzer")
 
     -- Diagnostics (errors/warnings reported by servers).

@@ -11,10 +11,9 @@ return {
     opts = {
       -- Servers that mason installs automatically if missing.
       -- rust_analyzer is intentionally absent: install it with
-      -- `rustup component add rust-analyzer` so it matches your toolchain.
       ensure_installed = { "lua_ls", "basedpyright", "elixirls", "intelephense" },
-      -- Automatically call vim.lsp.enable() for every server installed via mason,
-      -- so servers start when you open a matching filetype.
+
+      -- Automatically call vim.lsp.enable() for every server installed via mason.
       automatic_enable = true,
     },
   },

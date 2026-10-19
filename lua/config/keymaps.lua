@@ -39,3 +39,9 @@ vim.keymap.set({'n', 'v'}, '_', 'J', { desc = 'Join lines' })
 
 vim.keymap.set('n', '<C-/>', 'gcc', { remap = true, desc = 'Toggle comment line' })
 vim.keymap.set('v', '<C-/>', 'gc', { remap = true, desc = 'Toggle comment selection' })
+
+-- Terminal
+vim.keymap.set('n', '<leader>tj', ':botright split | terminal<CR>', { desc = 'Open terminal at bottom' })
+vim.keymap.set('n', '<leader>tt', ':tab terminal<CR>', { desc = 'Open terminal in new tab' })
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
+vim.api.nvim_create_autocmd("TermOpen", { pattern = "*", command = "startinsert" })
