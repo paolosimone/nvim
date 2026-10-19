@@ -32,7 +32,6 @@ return {
 
         ["l"] = "open",
         ["h"] = "close_node",
-        ["<space>"] = { "toggle_node", nowait = true },
         ["z"] = "close_all_nodes",
 
         ["<cr>"] = {

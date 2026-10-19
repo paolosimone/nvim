@@ -6,7 +6,6 @@ require("config.lazy")
 
 TODO
 
-- telescope
 - git: blame + permalink + lazygit
 - lualine
 - multicursor
