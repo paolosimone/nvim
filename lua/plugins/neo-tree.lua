@@ -5,6 +5,7 @@ return {
     "nvim-lua/plenary.nvim",
     "MunifTanjim/nui.nvim",
     "nvim-tree/nvim-web-devicons",
+    "s1n7ax/nvim-window-picker",
   },
   lazy = false, -- neo-tree will lazily load itself
 
@@ -19,16 +20,6 @@ return {
     sources = {
       "filesystem",
       "git_status",
-    },
-
-    source_selector = {
-      winbar = false, -- toggle to show selector on winbar
-      statusline = true, -- toggle to show selector on statusline
-
-      sources = {
-        { source = "filesystem" },
-        { source = "git_status" },
-      },
     },
 
     window = {
@@ -84,7 +75,6 @@ return {
       window = {
         mappings = {
           ["."] = "set_root",
-          ["h"] = "navigate_up",
           ["H"] = "toggle_hidden",
           ["/"] = "fuzzy_finder",
           ["i"] = "show_file_details", -- see `:h neo-tree-file-actions` for options to customize the window.

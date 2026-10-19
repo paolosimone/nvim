@@ -1,7 +1,4 @@
 return {
-  -- nvim-lspconfig ships default configs (cmd, filetypes, root markers) for
-  -- hundreds of servers, under its lsp/ directory. Neovim 0.11+ reads them
-  -- natively through vim.lsp.config / vim.lsp.enable.
   "neovim/nvim-lspconfig",
   dependencies = { "saghen/blink.cmp" },
   config = function()
@@ -12,13 +9,11 @@ return {
     })
 
     -- Per-server overrides are merged on top of the defaults from nvim-lspconfig.
-    -- lua_ls: tell it that `vim` is a legit global (otherwise "undefined global" warnings
-    -- appear in your nvim config) and make it aware of the Neovim runtime files.
     vim.lsp.config("lua_ls", {
       settings = {
         Lua = {
           runtime = { version = "LuaJIT" },
-          diagnostics = { globals = { "vim" } },
+          diagnostics = { globals = { "vim" } }, -- avoid "undefined global" warnings
           workspace = {
             checkThirdParty = false,
             library = { vim.env.VIMRUNTIME },
@@ -46,15 +41,16 @@ return {
         local function map(lhs, rhs, desc)
           vim.keymap.set("n", lhs, rhs, { buffer = event.buf, silent = true, desc = desc })
         end
-        map("gd", vim.lsp.buf.definition, "Go to definition")
-        map("gD", vim.lsp.buf.declaration, "Go to declaration")
-        map("gi", vim.lsp.buf.implementation, "Go to implementation")
-        map("gr", vim.lsp.buf.references, "List references")
-        map("K", vim.lsp.buf.hover, "Hover documentation")
-        map("<leader>cr", vim.lsp.buf.rename, "Rename symbol")
-        map("<leader>ca", vim.lsp.buf.code_action, "Code action")
-        map("<leader>cd", vim.diagnostic.open_float, "Line diagnostics")
-        -- [d / ]d (previous/next diagnostic) are already built into Neovim 0.11+.
+
+        -- Remove the default LSP mapping
+        pcall(vim.keymap.del, 'n', 'K', { buf = event.buf })
+
+        map("<leader>kk", vim.lsp.buf.definition, "Go to definition")
+        map("<leader>kl", vim.lsp.buf.references, "List references")
+        map("<leader>ki", vim.lsp.buf.hover, "Hover documentation")
+        map("<leader>kd", vim.diagnostic.open_float, "Line diagnostics")
+        map("<leader>kr", vim.lsp.buf.rename, "Rename symbol")
+        map("<leader>k.", vim.lsp.buf.code_action, "Code action")
       end,
     })
   end,
