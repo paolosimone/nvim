@@ -20,21 +20,62 @@ return {
   -- Lazy-load on first use of any of these keys (`desc` shows up in which-key / :map).
   -- Live grep and file search rely on ripgrep (`rg`) being installed.
   keys = {
+    -- Files
     { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Find files" },
     { "<leader>fa", function() require("telescope.builtin").find_files({ hidden = true, no_ignore = true }) end, desc = "Find all files (hidden + ignored)" },
-    { "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Grep in project" },
-    { "<leader>fw", function() require("telescope.builtin").grep_string() end, mode = { "n", "v" }, desc = "Grep word under cursor / selection" },
     { "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "Open buffers" },
     { "<leader>fr", function() require("telescope.builtin").oldfiles() end, desc = "Recent files" },
     { "<leader>fu", function() require("telescope.builtin").resume() end, desc = "Resume last picker" },
+    { "<leader><leader>", function() require("telescope.builtin").buffers() end, desc = "Open buffers" },
+
+    -- Words
+    { "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Grep in project" },
+    { "<leader>fw", function() require("telescope.builtin").grep_string() end, mode = { "n", "v" }, desc = "Grep word under cursor / selection" },
+    { "<leader>/", function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Fuzzy find in current buffer" },
+
+    -- Others
     { "<leader>fk", function() require("telescope.builtin").keymaps() end, desc = "Keymaps" },
     { "<leader>fc", function() require("telescope.builtin").commands() end, desc = "Commands" },
     { "<leader>fd", function() require("telescope.builtin").diagnostics() end, desc = "Diagnostics" },
+    { "<leader>fm", function() require("telescope.builtin").marks() end, desc = "Marks" },
     { "<leader>fs", function() require("telescope.builtin").lsp_document_symbols() end, desc = "Document symbols (LSP)" },
     { "<leader>fS", function() require("telescope.builtin").lsp_dynamic_workspace_symbols() end, desc = "Workspace symbols (LSP)" },
-    { "<leader>fm", function() require("telescope.builtin").marks() end, desc = "Marks" },
-    { "<leader><leader>", function() require("telescope.builtin").buffers() end, desc = "Open buffers" },
-    { "<leader>/", function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Fuzzy find in current buffer" },
+
+    -- Tab marks files; <CR> diffs the two marked ones (or the one marked vs. the current buffer).
+    {
+      "<leader>fx",
+      function()
+        local actions = require("telescope.actions")
+        local state = require("telescope.actions.state")
+        require("telescope.builtin").find_files({
+          prompt_title = "Diff: Tab to mark 2 files (or 1 vs current), Enter to compare",
+          attach_mappings = function(prompt_bufnr)
+            actions.select_default:replace(function()
+              local picker = state.get_current_picker(prompt_bufnr)
+              local files = {}
+              for _, entry in ipairs(picker:get_multi_selection()) do
+                table.insert(files, entry.path or entry[1])
+              end
+              if #files == 0 then
+                local entry = state.get_selected_entry()
+                files = { entry and (entry.path or entry[1]) }
+              end
+              actions.close(prompt_bufnr)
+              if #files == 1 then
+                vim.cmd("vert diffsplit " .. vim.fn.fnameescape(files[1]))
+              elseif #files == 2 then
+                vim.cmd("tabedit " .. vim.fn.fnameescape(files[1]))
+                vim.cmd("vert diffsplit " .. vim.fn.fnameescape(files[2]))
+              else
+                vim.notify("Select at most 2 files", vim.log.levels.WARN)
+              end
+            end)
+            return true
+          end,
+        })
+      end,
+      desc = "Diff two files",
+    },
   },
 
   -- Using `config` (not `opts`) because we must call load_extension after setup.

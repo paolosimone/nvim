@@ -51,3 +51,29 @@ vim.keymap.set('n', '<leader>tj', ':botright split | terminal<CR>', { desc = 'Op
 vim.keymap.set('n', '<leader>tt', ':tab terminal<CR>', { desc = 'Open terminal in new tab' })
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
 vim.api.nvim_create_autocmd("TermOpen", { pattern = "*", command = "startinsert" })
+
+-- Diff navigation: J/K are mapped buffer-locally only while a window is in diff mode
+local function sync_diff_keymaps(win)
+  local buf = vim.api.nvim_win_get_buf(win)
+  local in_diff = vim.wo[win].diff
+  local mapped = vim.b[buf].diff_keymaps
+  if in_diff and not mapped then
+    -- expr fallback keeps the global scroll mappings if a stale mapping outlives diff mode (e.g. :diffoff)
+    vim.keymap.set('n', 'J', function() return vim.wo.diff and ']c' or '<C-d>zz' end, { buffer = buf, expr = true, desc = 'Next diff' })
+    vim.keymap.set('n', 'K', function() return vim.wo.diff and '[c' or '<C-u>zz' end, { buffer = buf, expr = true, desc = 'Previous diff' })
+    vim.b[buf].diff_keymaps = true
+  elseif not in_diff and mapped then
+    pcall(vim.keymap.del, 'n', 'J', { buffer = buf })
+    pcall(vim.keymap.del, 'n', 'K', { buffer = buf })
+    vim.b[buf].diff_keymaps = false
+  end
+end
+-- OptionSet alone misses :diffsplit/:diffthis, so DiffUpdated and window events also resync
+vim.api.nvim_create_autocmd({ 'OptionSet', 'WinEnter', 'BufWinEnter', 'DiffUpdated' }, {
+  callback = function(ev)
+    if ev.event == 'OptionSet' and ev.match ~= 'diff' then return end
+    for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+      sync_diff_keymaps(win)
+    end
+  end,
+})

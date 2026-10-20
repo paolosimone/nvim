@@ -103,9 +103,9 @@ return {
     git_status = {
       window = {
         mappings = {
-          ["a"] = "git_toggle_file_stage",
-          ["A"] = "git_add_all",
-          ["x"] = "git_revert_file",
+          ["<space>"] = "git_toggle_file_stage",
+          ["a"] = "git_add_all",
+          ["d"] = "git_revert_file",
           ["c"] = "git_commit",
           ["p"] = "git_pull",
           ["P"] = "git_push",
