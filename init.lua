@@ -6,10 +6,10 @@ require("config.lazy")
 
 TODO
 
-- git: blame + permalink + lazygit
+- git: blame + permalink + diffs + changes
 - lualine
 - multicursor
 - bufferline + tab shortcuts
-- devpod
+- devcontainer
 
 ]]

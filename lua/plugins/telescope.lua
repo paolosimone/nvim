@@ -27,9 +27,8 @@ return {
     { "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "Open buffers" },
     { "<leader>fr", function() require("telescope.builtin").oldfiles() end, desc = "Recent files" },
     { "<leader>fu", function() require("telescope.builtin").resume() end, desc = "Resume last picker" },
-    { "<leader>fh", function() require("telescope.builtin").help_tags() end, desc = "Help tags" },
     { "<leader>fk", function() require("telescope.builtin").keymaps() end, desc = "Keymaps" },
-    { "<leader>fp", function() require("telescope.builtin").commands() end, desc = "Commands" },
+    { "<leader>fc", function() require("telescope.builtin").commands() end, desc = "Commands" },
     { "<leader>fd", function() require("telescope.builtin").diagnostics() end, desc = "Diagnostics" },
     { "<leader>fs", function() require("telescope.builtin").lsp_document_symbols() end, desc = "Document symbols (LSP)" },
     { "<leader>fS", function() require("telescope.builtin").lsp_dynamic_workspace_symbols() end, desc = "Workspace symbols (LSP)" },
@@ -46,7 +45,7 @@ return {
     telescope.setup({
       defaults = {
         prompt_prefix = "  ", -- icon shown before the search input
-        selection_caret = "▶ ", -- marker for the highlighted result
+        selection_caret = "> ", -- marker for the highlighted result
         entry_prefix = "  ", -- padding for non-selected rows; must be the same width as selection_caret or rows shift
         path_display = { "truncate" }, -- shorten long paths with "..." instead of overflowing
         sorting_strategy = "ascending", -- best match at the top, next to the prompt

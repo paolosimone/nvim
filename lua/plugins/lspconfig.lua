@@ -1,3 +1,7 @@
+-- Clear default global diagnostic keymaps
+pcall(vim.keymap.del, 'n', '<C-w>d')
+pcall(vim.keymap.del, 'n', '<C-w><C-d>')
+
 return {
   "neovim/nvim-lspconfig",
   dependencies = { "saghen/blink.cmp" },
@@ -42,8 +46,9 @@ return {
           vim.keymap.set("n", lhs, rhs, { buffer = event.buf, silent = true, desc = desc })
         end
 
-        -- Remove the default LSP mapping
-        pcall(vim.keymap.del, 'n', 'K', { buf = event.buf })
+        -- Remove the default LSP mapping conflicting with custom keymaps
+        pcall(vim.keymap.del, 'n', 'K', { buffer = event.buf })
+        pcall(vim.keymap.del, 'n', '<C-w>d', { buffer = event.buf })
 
         map("<leader>kk", vim.lsp.buf.definition, "Go to definition")
         map("<leader>kl", vim.lsp.buf.references, "List references")
