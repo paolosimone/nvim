@@ -23,11 +23,28 @@ vim.keymap.set('n', '<M-S-h>', ':vertical resize -2<CR>')
 vim.keymap.set('n', '<M-S-l>', ':vertical resize +2<CR>')
 
 vim.keymap.set('n', '<leader>w', function()
-  local picked_window_id = require('window-picker').pick_window()
+  -- the picker ignores neo-tree and terminals by default (right for choosing where to open a file);
+  -- here we want to focus any window, so override the ignored filetypes/buftypes for this call only
+  local picked_window_id = require('window-picker').pick_window({
+    filter_rules = { bo = { filetype = { 'notify', 'snacks_notif' }, buftype = {} } },
+  })
   if picked_window_id then
     vim.api.nvim_set_current_win(picked_window_id)
   end
 end, { desc = "Pick a window to focus" })
+
+-- Tabs
+vim.keymap.set('n', '<M-]>', '<cmd>tabnext<CR>', { desc = 'Next tab' })
+vim.keymap.set('n', '<M-[>', '<cmd>tabprevious<CR>', { desc = 'Previous tab' })
+vim.keymap.set('n', '<M-t>', '<cmd>tabnew<CR>', { desc = 'New tab' })
+vim.keymap.set('n', '<leader>tt', '<cmd>tabclose<CR>', { desc = 'Close tab' })
+vim.keymap.set('n', '<leader>to', '<cmd>tabonly<CR>', { desc = 'Close other tabs' })
+vim.keymap.set('n', '<leader>t>', '<cmd>tabmove +1<CR>', { desc = 'Move tab right' })
+vim.keymap.set('n', '<leader>t<', '<cmd>tabmove -1<CR>', { desc = 'Move tab left' })
+for i = 1, 9 do
+  -- <M-1..9> jump straight to the n-th tab
+  vim.keymap.set('n', '<M-' .. i .. '>', i .. 'gt', { desc = 'Go to tab ' .. i })
+end
 
 -- Navigation
 vim.keymap.set("n", "J", "<C-d>zz")
@@ -37,6 +54,10 @@ vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'File Explorer'
 vim.keymap.set('n', '<leader>ge', ' :Neotree float git_status toggle=true<CR>', { desc = 'Git Explorer' })
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { silent = true })
+
+vim.keymap.set("n", "<leader>o", function()
+  vim.ui.open(vim.fn.expand("<cfile>"))
+end, { desc = "Open link under cursor" })
 
 -- Editing
 vim.keymap.set({'n', 'v'}, '_', 'J', { desc = 'Join lines' })

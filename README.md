@@ -20,19 +20,19 @@ lazy.nvim bootstraps itself and installs the plugins on first launch.
 
 ## Plugins
 
-| Plugin        | Purpose                                  |
-|---------------|------------------------------------------|
-| catppuccin    | Color scheme                             |
-| blink.cmp     | Autocompletion                           |
-| bufferline    | Tab line (tab pages, not buffers)        |
-| diffview      | Git diffs, file history, merge conflicts |
-| fugitive      | Git commands inside Neovim               |
-| gitsigns      | Git change signs in the gutter           |
-| guess-indent  | Automatic indentation detection          |
-| lspconfig     | Language server configuration            |
-| mason         | Install and manage LSP servers and tools |
-| neo-tree      | File explorer sidebar                    |
-| telescope     | Fuzzy finder for files, text and more    |
-| window-picker | Pick a window by letter                  |
+| Plugin                                                        | Purpose                                  |
+|---------------------------------------------------------------|------------------------------------------|
+| [catppuccin](https://github.com/catppuccin/nvim)              | Color scheme                             |
+| [blink.cmp](https://github.com/saghen/blink.cmp)              | Autocompletion                           |
+| [diffview](https://github.com/sindrets/diffview.nvim)         | Git diffs, file history, merge conflicts |
+| [fugitive](https://github.com/tpope/vim-fugitive)             | Git commands inside Neovim               |
+| [gitsigns](https://github.com/lewis6991/gitsigns.nvim)        | Git change signs in the gutter           |
+| [guess-indent](https://github.com/nmac427/guess-indent.nvim)  | Automatic indentation detection          |
+| [lspconfig](https://github.com/neovim/nvim-lspconfig)         | Language server configuration            |
+| [lualine](https://github.com/nvim-lualine/lualine.nvim)       | Statusline and tab line (tab pages)      |
+| [mason](https://github.com/mason-org/mason.nvim)              | Install and manage LSP servers and tools |
+| [neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim)    | File explorer sidebar                    |
+| [telescope](https://github.com/nvim-telescope/telescope.nvim) | Fuzzy finder for files, text and more    |
+| [window-picker](https://github.com/s1n7ax/nvim-window-picker) | Pick a window by letter                  |
 
 The leader key is `<Space>`.

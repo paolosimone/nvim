@@ -6,7 +6,6 @@ require("config.lazy")
 
 TODO
 
-- lualine
 - markdown and mermaid
 - multicursor
 - devcontainer

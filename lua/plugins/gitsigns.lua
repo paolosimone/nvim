@@ -2,8 +2,10 @@ return {
   "lewis6991/gitsigns.nvim",
   event = { "BufReadPost", "BufNewFile" },
   opts = {
-    current_line_blame = false, -- toggle with <leader>gb
-    current_line_blame_opts = { delay = 300 },
+    -- Blame is computed for the cursor line and shown in the lualine statusline;
+    -- virt_text = false keeps it off the buffer itself. Toggle with <leader>gb.
+    current_line_blame = true,
+    current_line_blame_opts = { delay = 0, virt_text = false },
     current_line_blame_formatter = "<author>, <author_time:%Y-%m-%d %H:%M> - <summary>",
     on_attach = function(bufnr)
       local gs = require("gitsigns")
@@ -27,7 +29,7 @@ return {
       map("n", "<leader>gA", gs.stage_buffer, "Git stage buffer")
       map("n", "<leader>gR", gs.reset_buffer, "Git reset buffer")
       map("n", "<leader>gk", gs.preview_hunk, "Git preview hunk")
-      map("n", "<leader>gb", gs.toggle_current_line_blame, "Git toggle line blame")
+      map("n", "<leader>gb", gs.toggle_current_line_blame, "Git toggle line blame (statusline)")
     end,
   },
 }

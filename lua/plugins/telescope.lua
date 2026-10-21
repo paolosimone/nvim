@@ -128,6 +128,7 @@ return {
           },
           n = {
             ["q"] = actions.close, -- quit quickly
+            ["t"] = actions.select_tab, -- open selection in a new tab
             ["s"] = actions.select_vertical,
             ["S"] = actions.select_horizontal,
           },
