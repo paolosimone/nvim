@@ -46,6 +46,24 @@ vim.keymap.set('v', '<C-/>', 'gc', { remap = true, desc = 'Toggle comment select
 
 vim.keymap.set("x", "p", "P") -- Yank in visual selection without replacing the registry
 
+-- Copy "relative/path:line" (or "path:start-end" for a visual selection) to the clipboard
+vim.keymap.set({ 'n', 'x' }, '<leader>l', function()
+  local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.')
+  local first, last = vim.fn.line('.'), vim.fn.line('.')
+  if vim.fn.mode():match('^[vV\22]') then
+    first, last = vim.fn.line('v'), vim.fn.line('.')
+    if first > last then first, last = last, first end
+  end
+  local ref = path .. ':' .. first .. (last ~= first and ('-' .. last) or '')
+  vim.fn.setreg('+', ref)
+  vim.fn.setreg('"', ref)
+  if vim.fn.mode() ~= 'n' then
+    -- 'x' executes the Esc immediately, so the notification isn't wiped by the mode change
+    vim.api.nvim_feedkeys(vim.keycode('<Esc>'), 'nx', false)
+  end
+  vim.notify('Copied ' .. ref)
+end, { desc = 'Copy relative path and line(s)' })
+
 -- Terminal
 vim.keymap.set('n', '<leader>tj', ':botright split | terminal<CR>', { desc = 'Open terminal at bottom' })
 vim.keymap.set('n', '<leader>tt', ':tab terminal<CR>', { desc = 'Open terminal in new tab' })
