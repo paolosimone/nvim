@@ -15,7 +15,8 @@ local commands = {
   { "switch ", "Switch branch", "local_branch" },
   { "stash -u", "Stash changes" },
   { "stash pop", "Apply and drop latest stash" },
-  { "reset --soft HEAD~1", "Undo last commit, keep changes staged" },
+  { "reset --soft ", "Reset to commit, keep changes staged", "commit" },
+  { "reset --hard ", "Reset to commit, discard changes", "commit" },
   { "log --oneline --graph --decorate", "Commit graph" },
   { "blame", "Blame current file" },
 }
@@ -44,6 +45,18 @@ local function list_branches(kind)
   return result
 end
 
+-- Recent commits, newest first, as { hash, subject } pairs.
+local function list_commits()
+  local result = {}
+  for _, line in ipairs(vim.fn.systemlist({ "git", "log", "-n", "50", "--format=%h %s" })) do
+    local hash, subject = line:match("^(%S+) (.*)$")
+    if hash then
+      table.insert(result, { hash, subject })
+    end
+  end
+  return result
+end
+
 local function pick_branch(prefix, kind)
   local pickers = require("telescope.pickers")
   local finders = require("telescope.finders")
@@ -53,8 +66,15 @@ local function pick_branch(prefix, kind)
 
   pickers
     .new(require("telescope.themes").get_dropdown(), {
-      prompt_title = "git " .. vim.trim(prefix) .. " <branch>",
-      finder = finders.new_table({ results = list_branches(kind) }),
+      prompt_title = "git " .. vim.trim(prefix) .. (kind == "commit" and " <commit>" or " <branch>"),
+      finder = kind == "commit"
+          and finders.new_table({
+            results = list_commits(),
+            entry_maker = function(entry)
+              return { value = entry[1], display = entry[1] .. " " .. entry[2], ordinal = entry[1] .. " " .. entry[2] }
+            end,
+          })
+        or finders.new_table({ results = list_branches(kind) }),
       sorter = conf.generic_sorter({}),
       attach_mappings = function(prompt_bufnr)
         actions.select_default:replace(function()
@@ -62,7 +82,7 @@ local function pick_branch(prefix, kind)
           actions.close(prompt_bufnr)
           if selection then
             vim.schedule(function()
-              vim.cmd("Git " .. prefix .. selection[1])
+              vim.cmd("Git " .. prefix .. (selection.value or selection[1]))
             end)
           end
         end)
