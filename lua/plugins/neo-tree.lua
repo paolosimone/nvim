@@ -19,7 +19,6 @@ return {
 
     sources = {
       "filesystem",
-      "git_status",
     },
 
     window = {
@@ -97,20 +96,6 @@ return {
             --".null-ls_*",
           },
         }
-      },
-    },
-
-    git_status = {
-      window = {
-        mappings = {
-          ["<space>"] = "git_toggle_file_stage",
-          ["a"] = "git_add_all",
-          ["d"] = "git_revert_file",
-          ["c"] = "git_commit",
-          ["p"] = "git_pull",
-          ["P"] = "git_push",
-          ["i"] = "show_file_details", -- see `:h neo-tree-file-actions` for options to customize the window.
-        },
       },
     },
   },
