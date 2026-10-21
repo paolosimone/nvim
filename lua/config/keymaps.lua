@@ -47,7 +47,7 @@ vim.keymap.set('v', '<C-/>', 'gc', { remap = true, desc = 'Toggle comment select
 vim.keymap.set("x", "p", "P") -- Yank in visual selection without replacing the registry
 
 -- Copy "relative/path:line" (or "path:start-end" for a visual selection) to the clipboard
-vim.keymap.set({ 'n', 'x' }, '<leader>l', function()
+vim.keymap.set({ 'n', 'x' }, '<leader>y', function()
   local path = vim.fn.fnamemodify(vim.api.nvim_buf_get_name(0), ':.')
   local first, last = vim.fn.line('.'), vim.fn.line('.')
   if vim.fn.mode():match('^[vV\22]') then
@@ -65,8 +65,8 @@ vim.keymap.set({ 'n', 'x' }, '<leader>l', function()
 end, { desc = 'Copy relative path and line(s)' })
 
 -- Terminal
-vim.keymap.set('n', '<leader>tj', ':botright split | terminal<CR>', { desc = 'Open terminal at bottom' })
-vim.keymap.set('n', '<leader>tt', ':tab terminal<CR>', { desc = 'Open terminal in new tab' })
+vim.keymap.set('n', '<leader>;', ':botright split | terminal<CR>', { desc = 'Open terminal at bottom' })
+vim.keymap.set('n', '<leader>:', ':tab terminal<CR>', { desc = 'Open terminal in new tab' })
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
 vim.api.nvim_create_autocmd("TermOpen", { pattern = "*", command = "startinsert" })
 

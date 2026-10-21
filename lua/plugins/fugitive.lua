@@ -1,7 +1,7 @@
 -- Curated git subcommands shown by the <leader>gg picker. Add entries as needed.
 local commands = {
   { "status", "Show working tree status" },
-  { "commit", "Commit staged changes" },
+  { "commit -m ", "Commit staged changes", "message" },
   { "commit --amend --no-edit", "Amend the last commit" },
   { "push", "Push to remote" },
   { "push --force-with-lease", "Force push (safe)" },
@@ -123,7 +123,14 @@ local function pick_git_command()
             return
           end
           vim.schedule(function()
-            if selection.kind then
+            if selection.kind == "message" then
+              -- Ask for the commit message first; empty/cancelled input aborts. `true` also escapes %, # and ! for the cmdline.
+              vim.ui.input({ prompt = "Commit message: " }, function(msg)
+                if msg and vim.trim(msg) ~= "" then
+                  vim.cmd("Git " .. selection.value .. vim.fn.shellescape(msg, true))
+                end
+              end)
+            elseif selection.kind then
               pick_branch(selection.value, selection.kind)
             elseif selection.value:sub(-1) == " " then
               vim.api.nvim_feedkeys(":Git " .. selection.value, "n", false)
