@@ -3,24 +3,24 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 -- Windows
-vim.keymap.set('n', '<C-h>', '<C-w>h', { silent = true })
-vim.keymap.set('n', '<C-j>', '<C-w>j', { silent = true })
-vim.keymap.set('n', '<C-k>', '<C-w>k', { silent = true })
-vim.keymap.set('n', '<C-l>', '<C-w>l', { silent = true })
+vim.keymap.set('n', '<M-h>', '<C-w>h', { silent = true })
+vim.keymap.set('n', '<M-j>', '<C-w>j', { silent = true })
+vim.keymap.set('n', '<M-k>', '<C-w>k', { silent = true })
+vim.keymap.set('n', '<M-l>', '<C-w>l', { silent = true })
 
-vim.keymap.set('n', '<C-s>', ':write<CR>')
+vim.keymap.set('n', '<M-s>', ':write<CR>')
 vim.keymap.set('n', '<C-S-s>', ':wa<CR>')
-vim.keymap.set('n', '<C-w>', '<Nop>', { remap = false }) -- clear default window navigation bindings
-vim.keymap.set('n', '<C-w>', ':quit<CR>')
-vim.keymap.set('n', '<C-S-w>', ':only<CR>')
+vim.keymap.set('n', '<M-w>', '<Nop>', { remap = false }) -- clear default window navigation bindings
+vim.keymap.set('n', '<M-w>', ':quit<CR>')
+vim.keymap.set('n', '<M-S-w>', ':only<CR>')
 
 vim.keymap.set('n', '<leader>S', ':split<CR>')
 vim.keymap.set('n', '<leader>s', ':vsplit<CR>')
 
-vim.keymap.set('n', '<M-k>', ':resize +2<CR>')
-vim.keymap.set('n', '<M-j>', ':resize -2<CR>')
-vim.keymap.set('n', '<M-h>', ':vertical resize -2<CR>')
-vim.keymap.set('n', '<M-l>', ':vertical resize +2<CR>')
+vim.keymap.set('n', '<M-S-k>', ':resize +2<CR>')
+vim.keymap.set('n', '<M-S-j>', ':resize -2<CR>')
+vim.keymap.set('n', '<M-S-h>', ':vertical resize -2<CR>')
+vim.keymap.set('n', '<M-S-l>', ':vertical resize +2<CR>')
 
 vim.keymap.set('n', '<leader>w', function()
   local picked_window_id = require('window-picker').pick_window()

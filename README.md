@@ -24,6 +24,7 @@ lazy.nvim bootstraps itself and installs the plugins on first launch.
 |---------------|------------------------------------------|
 | catppuccin    | Color scheme                             |
 | blink.cmp     | Autocompletion                           |
+| bufferline    | Tab line (tab pages, not buffers)        |
 | diffview      | Git diffs, file history, merge conflicts |
 | fugitive      | Git commands inside Neovim               |
 | gitsigns      | Git change signs in the gutter           |
