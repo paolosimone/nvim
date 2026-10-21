@@ -168,11 +168,9 @@ end
 return {
   "tpope/vim-fugitive",
   dependencies = { "nvim-telescope/telescope.nvim" },
-  cmd = { "Git", "G", "Gdiffsplit", "Gvdiffsplit", "Gread", "Gwrite", "GMove", "GDelete", "GBrowse", "Gclog" },
+  cmd = { "Git", "G", "Gread", "Gwrite", "GMove", "GDelete", "GBrowse", "Gclog" },
   keys = {
     { "<leader>gg", pick_git_command, desc = "Git commands (picker)" },
-    { "<leader>gd", "<cmd>Gvdiffsplit<CR>", desc = "Diff split vs index" },
-    { "<leader>gD", "<cmd>Gvdiffsplit master<CR>", desc = "Diff split vs master" },
     { "<leader>gy", copy_permalink, mode = { "n", "v" }, desc = "Copy GitHub permalink" },
   },
 }

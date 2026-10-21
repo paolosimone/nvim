@@ -16,6 +16,7 @@ Neovim configuration written in Lua, managed with lazy.nvim.
 - Global keymaps go in `config/keymaps.lua`; plugin-specific keymaps stay in that plugin's spec.
 - Use 2-space indentation and short inline comments, matching existing files.
 - Every new addition (plugin, option, keymap, autocmd, etc.) must be commented and explained; the owner uses this config to learn.
+- Git tools: always show commit timestamps as absolute dates, never relative to now (e.g. "2 days ago").
 - Keep plugins list in README.md up-to-date
 - Markdown tables: pad cells so columns and separator rows are aligned.
 
