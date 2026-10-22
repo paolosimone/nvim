@@ -6,9 +6,6 @@ require("config.lazy")
 
 TODO
 
-- markdown and mermaid
-- multicursor
-- devcontainer
 - tmux
 
 ]]

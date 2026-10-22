@@ -32,6 +32,7 @@ lazy.nvim bootstraps itself and installs the plugins on first launch.
 | [lualine](https://github.com/nvim-lualine/lualine.nvim)             | Statusline and tab line (tab pages)      |
 | [markdown-preview](https://github.com/iamcco/markdown-preview.nvim) | Live markdown preview in a browser       |
 | [mason](https://github.com/mason-org/mason.nvim)                    | Install and manage LSP servers and tools |
+| [multicursor](https://github.com/jake-stewart/multicursor.nvim)     | Multiple cursors                         |
 | [neo-tree](https://github.com/nvim-neo-tree/neo-tree.nvim)          | File explorer sidebar                    |
 | [telescope](https://github.com/nvim-telescope/telescope.nvim)       | Fuzzy finder for files, text and more    |
 | [window-picker](https://github.com/s1n7ax/nvim-window-picker)       | Pick a window by letter                  |
