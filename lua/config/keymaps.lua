@@ -31,39 +31,38 @@ vim.keymap.set('n', '<leader>w', function()
   if picked_window_id then
     vim.api.nvim_set_current_win(picked_window_id)
   end
-end, { desc = "Pick a window to focus" })
+end, { desc = "Window: pick and focus" })
 
 -- Tabs
-vim.keymap.set('n', '<M-]>', '<cmd>tabnext<CR>', { desc = 'Next tab' })
-vim.keymap.set('n', '<M-[>', '<cmd>tabprevious<CR>', { desc = 'Previous tab' })
-vim.keymap.set('n', '<M-t>', '<cmd>tabnew<CR>', { desc = 'New tab' })
-vim.keymap.set('n', '<leader>tt', '<cmd>tabclose<CR>', { desc = 'Close tab' })
-vim.keymap.set('n', '<leader>to', '<cmd>tabonly<CR>', { desc = 'Close other tabs' })
-vim.keymap.set('n', '<leader>t>', '<cmd>tabmove +1<CR>', { desc = 'Move tab right' })
-vim.keymap.set('n', '<leader>t<', '<cmd>tabmove -1<CR>', { desc = 'Move tab left' })
+vim.keymap.set('n', '<M-]>', '<cmd>tabnext<CR>', { desc = 'Tab: next' })
+vim.keymap.set('n', '<M-[>', '<cmd>tabprevious<CR>', { desc = 'Tab: previous' })
+vim.keymap.set('n', '<M-t>', '<cmd>tabnew<CR>', { desc = 'Tab: new' })
+vim.keymap.set('n', '<leader>tt', '<cmd>tabclose<CR>', { desc = 'Tab: close' })
+vim.keymap.set('n', '<leader>to', '<cmd>tabonly<CR>', { desc = 'Tab: close others' })
+vim.keymap.set('n', '<leader>t>', '<cmd>tabmove +1<CR>', { desc = 'Tab: move right' })
+vim.keymap.set('n', '<leader>t<', '<cmd>tabmove -1<CR>', { desc = 'Tab: move left' })
 for i = 1, 9 do
   -- <M-1..9> jump straight to the n-th tab
-  vim.keymap.set('n', '<M-' .. i .. '>', i .. 'gt', { desc = 'Go to tab ' .. i })
+  vim.keymap.set('n', '<M-' .. i .. '>', i .. 'gt', { desc = 'Tab: go to ' .. i })
 end
 
 -- Navigation
 vim.keymap.set("n", "J", "<C-d>zz")
 vim.keymap.set("n", "K", "<C-u>zz")
 
-vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'File Explorer' })
-vim.keymap.set('n', '<leader>ge', ' :Neotree float git_status toggle=true<CR>', { desc = 'Git Explorer' })
+vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'File: explorer' })
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { silent = true })
 
 vim.keymap.set("n", "<leader>o", function()
   vim.ui.open(vim.fn.expand("<cfile>"))
-end, { desc = "Open link under cursor" })
+end, { desc = "Edit: open link under cursor" })
 
 -- Editing
-vim.keymap.set({'n', 'v'}, '_', 'J', { desc = 'Join lines' })
+vim.keymap.set({'n', 'v'}, '_', 'J', { desc = 'Edit: join lines' })
 
-vim.keymap.set('n', '<C-/>', 'gcc', { remap = true, desc = 'Toggle comment line' })
-vim.keymap.set('v', '<C-/>', 'gc', { remap = true, desc = 'Toggle comment selection' })
+vim.keymap.set('n', '<C-/>', 'gcc', { remap = true, desc = 'Edit: toggle comment line' })
+vim.keymap.set('v', '<C-/>', 'gc', { remap = true, desc = 'Edit: toggle comment selection' })
 
 vim.keymap.set("x", "p", "P") -- Yank in visual selection without replacing the registry
 
@@ -83,12 +82,12 @@ vim.keymap.set({ 'n', 'x' }, '<leader>y', function()
     vim.api.nvim_feedkeys(vim.keycode('<Esc>'), 'nx', false)
   end
   vim.notify('Copied ' .. ref)
-end, { desc = 'Copy relative path and line(s)' })
+end, { desc = 'File: copy relative path and line(s)' })
 
 -- Terminal
-vim.keymap.set('n', '<leader>;', ':botright split | terminal<CR>', { desc = 'Open terminal at bottom' })
-vim.keymap.set('n', '<leader>:', ':tab terminal<CR>', { desc = 'Open terminal in new tab' })
-vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Exit terminal mode' })
+vim.keymap.set('n', '<leader>;', ':botright split | terminal<CR>', { desc = 'Terminal: open at bottom' })
+vim.keymap.set('n', '<leader>:', ':tab terminal<CR>', { desc = 'Terminal: open in new tab' })
+vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = 'Terminal: exit mode' })
 vim.api.nvim_create_autocmd("TermOpen", { pattern = "*", command = "startinsert" })
 
 -- Diff navigation: J/K are mapped buffer-locally only while a window is in diff mode
@@ -98,8 +97,8 @@ local function sync_diff_keymaps(win)
   local mapped = vim.b[buf].diff_keymaps
   if in_diff and not mapped then
     -- expr fallback keeps the global scroll mappings if a stale mapping outlives diff mode (e.g. :diffoff)
-    vim.keymap.set('n', 'J', function() return vim.wo.diff and ']c' or '<C-d>zz' end, { buffer = buf, expr = true, desc = 'Next diff' })
-    vim.keymap.set('n', 'K', function() return vim.wo.diff and '[c' or '<C-u>zz' end, { buffer = buf, expr = true, desc = 'Previous diff' })
+    vim.keymap.set('n', 'J', function() return vim.wo.diff and ']c' or '<C-d>zz' end, { buffer = buf, expr = true, desc = 'Diff: next' })
+    vim.keymap.set('n', 'K', function() return vim.wo.diff and '[c' or '<C-u>zz' end, { buffer = buf, expr = true, desc = 'Diff: previous' })
     vim.b[buf].diff_keymaps = true
   elseif not in_diff and mapped then
     pcall(vim.keymap.del, 'n', 'J', { buffer = buf })

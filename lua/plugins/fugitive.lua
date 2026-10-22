@@ -177,7 +177,7 @@ return {
   dependencies = { "nvim-telescope/telescope.nvim" },
   cmd = { "Git", "G", "Gread", "Gwrite", "GMove", "GDelete", "GBrowse", "Gclog" },
   keys = {
-    { "<leader>gg", pick_git_command, desc = "Git commands (picker)" },
-    { "<leader>gy", copy_permalink, mode = { "n", "v" }, desc = "Copy GitHub permalink" },
+    { "<leader>gg", pick_git_command, desc = "Git: commands (picker)" },
+    { "<leader>gy", copy_permalink, mode = { "n", "v" }, desc = "Git: copy GitHub permalink" },
   },
 }

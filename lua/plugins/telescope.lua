@@ -21,25 +21,25 @@ return {
   -- Live grep and file search rely on ripgrep (`rg`) being installed.
   keys = {
     -- Files
-    { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Find files" },
-    { "<leader>fa", function() require("telescope.builtin").find_files({ hidden = true, no_ignore = true }) end, desc = "Find all files (hidden + ignored)" },
-    { "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "Open buffers" },
-    { "<leader>fr", function() require("telescope.builtin").oldfiles() end, desc = "Recent files" },
-    { "<leader>fu", function() require("telescope.builtin").resume() end, desc = "Resume last picker" },
-    { "<leader><leader>", function() require("telescope.builtin").buffers() end, desc = "Open buffers" },
+    { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "Find: files" },
+    { "<leader>fa", function() require("telescope.builtin").find_files({ hidden = true, no_ignore = true }) end, desc = "Find: all files (hidden + ignored)" },
+    { "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "Find: open buffers" },
+    { "<leader>fr", function() require("telescope.builtin").oldfiles() end, desc = "Find: recent files" },
+    { "<leader>fu", function() require("telescope.builtin").resume() end, desc = "Find: resume last picker" },
+    { "<leader><leader>", function() require("telescope.builtin").buffers() end, desc = "Find: open buffers" },
 
     -- Words
-    { "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Grep in project" },
-    { "<leader>fw", function() require("telescope.builtin").grep_string() end, mode = { "n", "v" }, desc = "Grep word under cursor / selection" },
-    { "<leader>/", function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Fuzzy find in current buffer" },
+    { "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Find: grep in project" },
+    { "<leader>fw", function() require("telescope.builtin").grep_string() end, mode = { "n", "v" }, desc = "Find: grep word under cursor / selection" },
+    { "<leader>/", function() require("telescope.builtin").current_buffer_fuzzy_find() end, desc = "Find: fuzzy in current buffer" },
 
     -- Others
-    { "<leader>fk", function() require("telescope.builtin").keymaps() end, desc = "Keymaps" },
-    { "<leader>fc", function() require("telescope.builtin").commands() end, desc = "Commands" },
-    { "<leader>fd", function() require("telescope.builtin").diagnostics() end, desc = "Diagnostics" },
-    { "<leader>fm", function() require("telescope.builtin").marks() end, desc = "Marks" },
-    { "<leader>fs", function() require("telescope.builtin").lsp_document_symbols() end, desc = "Document symbols (LSP)" },
-    { "<leader>fS", function() require("telescope.builtin").lsp_dynamic_workspace_symbols() end, desc = "Workspace symbols (LSP)" },
+    { "<leader>fk", function() require("telescope.builtin").keymaps() end, desc = "Find: keymaps" },
+    { "<leader>fc", function() require("telescope.builtin").commands() end, desc = "Find: commands" },
+    { "<leader>fd", function() require("telescope.builtin").diagnostics() end, desc = "Find: diagnostics" },
+    { "<leader>fm", function() require("telescope.builtin").marks() end, desc = "Find: marks" },
+    { "<leader>fs", function() require("telescope.builtin").lsp_document_symbols() end, desc = "Find: document symbols (LSP)" },
+    { "<leader>fS", function() require("telescope.builtin").lsp_dynamic_workspace_symbols() end, desc = "Find: workspace symbols (LSP)" },
 
     -- Tab marks files; <CR> diffs the two marked ones (or the one marked vs. the current buffer).
     {
@@ -74,7 +74,7 @@ return {
           end,
         })
       end,
-      desc = "Diff two files",
+      desc = "Find: diff two files",
     },
   },
 
@@ -116,16 +116,6 @@ return {
 
         -- Keymaps active inside the Telescope prompt
         mappings = {
-          i = {
-            ["<C-j>"] = actions.move_selection_next, -- same hjkl feel as window navigation
-            ["<C-k>"] = actions.move_selection_previous,
-            ["<C-n>"] = actions.cycle_history_next, -- browse previous searches
-            ["<C-p>"] = actions.cycle_history_prev,
-            ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist, -- send results to quickfix list
-            ["<C-s>"] = actions.select_vertical, -- open selection in a vertical split
-            ["<C-x>"] = actions.select_horizontal, -- open selection in a horizontal split
-            ["<C-u>"] = false, -- free <C-u> so it clears the prompt instead of scrolling the preview
-          },
           n = {
             ["q"] = actions.close, -- quit quickly
             ["t"] = actions.select_tab, -- open selection in a new tab

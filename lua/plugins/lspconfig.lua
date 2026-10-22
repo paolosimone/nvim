@@ -50,12 +50,12 @@ return {
         pcall(vim.keymap.del, 'n', 'K', { buffer = event.buf })
         pcall(vim.keymap.del, 'n', '<C-w>d', { buffer = event.buf })
 
-        map("<leader>kk", vim.lsp.buf.definition, "Go to definition")
-        map("<leader>kl", vim.lsp.buf.references, "List references")
-        map("<leader>ki", vim.lsp.buf.hover, "Hover documentation")
-        map("<leader>kd", vim.diagnostic.open_float, "Line diagnostics")
-        map("<leader>kr", vim.lsp.buf.rename, "Rename symbol")
-        map("<leader>k.", vim.lsp.buf.code_action, "Code action")
+        map("<leader>kk", vim.lsp.buf.definition, "Code: go to definition")
+        map("<leader>kl", vim.lsp.buf.references, "Code: list references")
+        map("<leader>ki", vim.lsp.buf.hover, "Code: hover documentation")
+        map("<leader>kd", vim.diagnostic.open_float, "Code: line diagnostics")
+        map("<leader>kr", vim.lsp.buf.rename, "Code: rename symbol")
+        map("<leader>k.", vim.lsp.buf.code_action, "Code: action")
       end,
     })
   end,
