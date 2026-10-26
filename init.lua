@@ -6,7 +6,6 @@ require("config.lazy")
 
 TODO
 
-- surround
 - quicker
 - tmux
 
