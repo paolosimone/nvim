@@ -20,6 +20,7 @@ Neovim configuration written in Lua, managed with lazy.nvim.
 - Git tools: always show commit timestamps as absolute dates, never relative to now (e.g. "2 days ago").
 - Keep plugins list in README.md up-to-date
 - Markdown tables: pad cells so columns and separator rows are aligned.
+- Markdown files must be readable without wrapping lines: keep prose lines around 80 characters long (tables and code blocks excepted).
 
 ## Validation
 

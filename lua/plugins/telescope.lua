@@ -26,7 +26,6 @@ return {
     { "<leader>fb", function() require("telescope.builtin").buffers() end, desc = "Find: open buffers" },
     { "<leader>fr", function() require("telescope.builtin").oldfiles() end, desc = "Find: recent files" },
     { "<leader>fu", function() require("telescope.builtin").resume() end, desc = "Find: resume last picker" },
-    { "<leader><leader>", function() require("telescope.builtin").buffers() end, desc = "Find: open buffers" },
 
     -- Words
     { "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "Find: grep in project" },

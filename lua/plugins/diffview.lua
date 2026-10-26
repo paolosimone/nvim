@@ -63,6 +63,10 @@ return {
         { "n", "U", function() require("diffview.actions").unstage_all() end, { desc = "Git: unstage all files" } },
         { "n", "r", function() require("diffview.actions").restore_entry() end, { desc = "Git: discard changes to file" } },
         { "n", "g?", function() require("diffview.actions").help("file_panel")() end, { desc = "Git: show keymap help" } },
+        { "n", "t", function() require("diffview.actions").goto_file_tab() end, { desc = "Git: open file in previous tab" } },
+      },
+      file_history_panel = {
+        { "n", "t", function() require("diffview.actions").goto_file_tab() end, { desc = "Git: open file in previous tab" } },
       },
       -- diff1 keymaps only apply to the single-buffer layout, i.e. the merge tool above;
       -- J/K navigate conflicts there, mirroring their hunk navigation in regular diffs

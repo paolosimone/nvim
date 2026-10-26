@@ -6,8 +6,14 @@ return {
   event = { "InsertEnter", "CmdlineEnter" },
   ---@module 'blink.cmp'
   opts = {
-    -- "default": <C-space> open menu, <C-n>/<C-p> select, <C-y> accept, <C-e> close.
-    keymap = { preset = "default" },
+    -- Like the "default" preset, but with Meta (Alt) instead of Ctrl:
+    keymap = {
+      preset = "none",
+      ["<M-space>"] = { "show", "show_documentation", "hide_documentation" },
+      ["<M-n>"] = { "select_next", "fallback_to_mappings" },
+      ["<M-p>"] = { "select_prev", "fallback_to_mappings" },
+      ["<tab>"] = { "select_and_accept", "fallback" },
+    },
     sources = { default = { "lsp", "path", "snippets", "buffer" } },
     completion = { documentation = { auto_show = true } },
   },

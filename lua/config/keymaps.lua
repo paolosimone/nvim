@@ -50,7 +50,10 @@ end
 vim.keymap.set("n", "J", "<C-d>zz")
 vim.keymap.set("n", "K", "<C-u>zz")
 
-vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'File: explorer' })
+vim.keymap.set("n", "<M-i>", "<C-i>", { desc = "Edit: jump inside" })
+vim.keymap.set("n", "<M-o>", "<C-o>", { desc = "Edit: jump outside" })
+
+vim.keymap.set('n', '<leader><leader>', '<C-^>', { desc = 'Edit: switch to last buffer' })
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { silent = true })
 
@@ -58,11 +61,14 @@ vim.keymap.set("n", "<leader>o", function()
   vim.ui.open(vim.fn.expand("<cfile>"))
 end, { desc = "Edit: open link under cursor" })
 
+vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'File: explorer' })
+
+
 -- Editing
 vim.keymap.set({'n', 'v'}, '_', 'J', { desc = 'Edit: join lines' })
 
-vim.keymap.set('n', '<C-/>', 'gcc', { remap = true, desc = 'Edit: toggle comment line' })
-vim.keymap.set('v', '<C-/>', 'gc', { remap = true, desc = 'Edit: toggle comment selection' })
+vim.keymap.set('n', '<M-/>', 'gcc', { remap = true, desc = 'Edit: toggle comment line' })
+vim.keymap.set('v', '<M-/>', 'gc', { remap = true, desc = 'Edit: toggle comment selection' })
 
 vim.keymap.set("x", "p", "P") -- Yank in visual selection without replacing the registry
 

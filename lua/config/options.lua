@@ -1,5 +1,26 @@
 -- Behaviour
 vim.opt.clipboard = "unnamedplus" -- Use system clipboard
+
+-- Without a native clipboard tool (SSH, devcontainers) copy via OSC 52 escape sequences,
+-- which the host terminal turns into a clipboard write (needs nvim >= 0.10 and terminal support)
+local native = { "pbcopy", "wl-copy", "xclip", "xsel", "win32yank.exe" }
+local has_native = false
+for _, tool in ipairs(native) do
+  if vim.fn.executable(tool) == 1 then has_native = true end
+end
+if vim.env.SSH_TTY or not has_native then
+  local osc52 = require("vim.ui.clipboard.osc52")
+  -- Pasting via OSC 52 often hangs or is blocked, so paste from nvim's own register instead
+  local function paste()
+    return { vim.fn.split(vim.fn.getreg(""), "\n"), vim.fn.getregtype("") }
+  end
+  vim.g.clipboard = {
+    name = "OSC 52",
+    copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
+    paste = { ["+"] = paste, ["*"] = paste },
+  }
+end
+
 vim.o.timeout = true -- Combination timeout
 vim.o.timeoutlen = 1000
 vim.opt.autoread = true -- Enable auto-read when a file is changed from the outside
