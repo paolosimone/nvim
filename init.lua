@@ -6,7 +6,6 @@ require("config.lazy")
 
 TODO
 
-- autopairs
 - surround
 - quicker
 - tmux

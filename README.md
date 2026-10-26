@@ -23,6 +23,7 @@ lazy.nvim bootstraps itself and installs the plugins on first launch.
 | Plugin                                                              | Purpose                                  |
 |---------------------------------------------------------------------|------------------------------------------|
 | [catppuccin](https://github.com/catppuccin/nvim)                    | Color scheme                             |
+| [autopairs](https://github.com/windwp/nvim-autopairs)               | Auto-close brackets and quotes           |
 | [blink.cmp](https://github.com/saghen/blink.cmp)                    | Autocompletion                           |
 | [diffview](https://github.com/sindrets/diffview.nvim)               | Git diffs, file history, merge conflicts |
 | [fugitive](https://github.com/tpope/vim-fugitive)                   | Git commands inside Neovim               |
