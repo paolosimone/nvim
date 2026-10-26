@@ -28,7 +28,7 @@ return {
       map("v", "<leader>gr", function() gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, "Git: reset selection")
       map("n", "<leader>gA", gs.stage_buffer, "Git: stage buffer")
       map("n", "<leader>gR", gs.reset_buffer, "Git: reset buffer")
-      map("n", "<leader>gk", gs.preview_hunk, "Git: preview hunk")
+      map("n", "<leader>gp", gs.preview_hunk, "Git: preview hunk")
       map("n", "<leader>gb", gs.toggle_current_line_blame, "Git: toggle line blame (statusline)")
     end,
   },

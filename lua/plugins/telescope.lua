@@ -115,7 +115,14 @@ return {
 
         -- Keymaps active inside the Telescope prompt
         mappings = {
+          -- Send all results to the quickfix list and open it (Alt-q instead of the default Ctrl-q)
+          i = {
+            ["<C-q>"] = false,
+            ["<M-q>"] = actions.send_to_qflist + actions.open_qflist,
+          },
           n = {
+            ["<C-q>"] = false,
+            ["<M-q>"] = actions.send_to_qflist + actions.open_qflist,
             ["q"] = actions.close, -- quit quickly
             ["t"] = actions.select_tab, -- open selection in a new tab
             ["s"] = actions.select_vertical,

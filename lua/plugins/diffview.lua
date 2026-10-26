@@ -59,6 +59,40 @@ return {
       -- File panel staging
       file_panel = {
         { "n", "a", function() require("diffview.actions").toggle_stage_entry() end, { desc = "Git: stage / unstage file" } },
+        -- Visual mode: stage / unstage every file or directory in the selected lines
+        -- (the default action only looks at the cursor line and ignores the selection)
+        {
+          "x",
+          "a",
+          function()
+            local view = require("diffview.lib").get_current_view()
+            local panel = view.panel
+            local first, last = vim.fn.line("v"), vim.fn.line(".")
+            if first > last then first, last = last, first end
+
+            -- Collect paths per kind: unstaged ("working"/"conflicting") are added, "staged" are reset
+            local to_add, to_reset = {}, {}
+            for line = first, last do
+              local comp = panel.components.comp:get_comp_on_line(line)
+              local item
+              if comp and comp.name == "file" then
+                item = comp.context
+              elseif comp and comp.name == "dir_name" then
+                item = comp.parent.context
+              end
+              if item then
+                table.insert(item.kind == "staged" and to_reset or to_add, item.path)
+              end
+            end
+
+            if #to_add > 0 then view.adapter:add_files(to_add) end
+            if #to_reset > 0 then view.adapter:reset_files(to_reset) end
+
+            vim.cmd("normal! \27") -- leave visual mode
+            view:update_files()
+          end,
+          { desc = "Git: stage / unstage selected files" },
+        },
         { "n", "A", function() require("diffview.actions").stage_all() end, { desc = "Git: stage all files" } },
         { "n", "U", function() require("diffview.actions").unstage_all() end, { desc = "Git: unstage all files" } },
         { "n", "r", function() require("diffview.actions").restore_entry() end, { desc = "Git: discard changes to file" } },
