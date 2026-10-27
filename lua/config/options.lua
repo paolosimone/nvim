@@ -41,7 +41,6 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "WinLeav
 
 -- Appearance
 vim.opt.number = true
-vim.opt.relativenumber = true
 vim.opt.wrap = false
 vim.opt.laststatus = 3 -- One global statusline 
 vim.o.winborder = "rounded" -- Options: "single", "double", "rounded", "solid", "shadow"

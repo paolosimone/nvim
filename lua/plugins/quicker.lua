@@ -1,7 +1,7 @@
 -- Editable quickfix: edit the text in the quickfix buffer and `:w` to apply the
 -- changes to the real files. Find & replace workflow with Telescope:
---   1. <leader>fg (live grep) and type the search
---   2. <M-q> (mapped in telescope.lua) sends all results to the quickfix list
+--   1. telescope live grep and type the search
+--   2. telescope send all results to quickfix list
 --   3. In the quickfix window edit the lines, e.g. `:%s/old/new/g`, then `:w`
 return {
   "stevearc/quicker.nvim",

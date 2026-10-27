@@ -82,6 +82,13 @@ return {
     local telescope = require("telescope")
     local actions = require("telescope.actions")
 
+    -- Send all results to the quickfix list, then show it in its own tab
+    -- (`:tab copen` opens a new tab holding the quickfix window).
+    local function qflist_in_tab(prompt_bufnr)
+      actions.send_to_qflist(prompt_bufnr)
+      vim.cmd("tab copen")
+    end
+
     telescope.setup({
       defaults = {
         prompt_prefix = "  ", -- icon shown before the search input
@@ -115,14 +122,14 @@ return {
 
         -- Keymaps active inside the Telescope prompt
         mappings = {
-          -- Send all results to the quickfix list and open it (Alt-q instead of the default Ctrl-q)
+          -- Send all results to the quickfix list and open it in a new tab (Alt-q instead of the default Ctrl-q)
           i = {
             ["<C-q>"] = false,
-            ["<M-q>"] = actions.send_to_qflist + actions.open_qflist,
+            ["<M-q>"] = qflist_in_tab,
           },
           n = {
             ["<C-q>"] = false,
-            ["<M-q>"] = actions.send_to_qflist + actions.open_qflist,
+            ["<M-q>"] = qflist_in_tab,
             ["q"] = actions.close, -- quit quickly
             ["t"] = actions.select_tab, -- open selection in a new tab
             ["s"] = actions.select_vertical,
