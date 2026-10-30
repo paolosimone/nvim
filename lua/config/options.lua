@@ -39,6 +39,12 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "TextChanged", "BufLeave", "WinLeav
   end,
 })
 
+-- Shell
+if vim.fn.executable("zsh") == 1 then
+  vim.opt.shell = vim.fn.exepath("zsh")
+elseif vim.fn.executable("bash") == 1 then
+  vim.opt.shell = vim.fn.exepath("bash")
+end
 -- Appearance
 vim.opt.number = true
 vim.opt.wrap = false
