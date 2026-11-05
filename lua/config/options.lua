@@ -19,11 +19,6 @@ if vim.env.SSH_TTY or not has_native then
     copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
     paste = { ["+"] = paste, ["*"] = paste },
   }
-  -- The OSC 52 escape sequence written on yank can interleave with nvim's own redraw
-  -- (ssh + tmux) and leave garbled cells, so force a full redraw right after each yank
-  vim.api.nvim_create_autocmd("TextYankPost", {
-    callback = function() vim.schedule(function() vim.cmd("redraw!") end) end,
-  })
 end
 
 -- `nvim ./bar` with a single directory argument: make it the cwd, so shell commands,
