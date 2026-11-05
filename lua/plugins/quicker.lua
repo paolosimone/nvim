@@ -15,9 +15,8 @@ return {
   },
   opts = {
     keys = {
-      -- Open the entry under the cursor (<CR> already opens it in the previous window)
       { "<leader>qS", "<C-w><CR>", desc = "Quickfix: open in horizontal split" }, -- <C-w><CR> splits and jumps to the entry
-      { "<leader>qs", "<C-w><CR><C-w>H", desc = "Quickfix: open in vertical split" }, -- <C-w>H moves the new window to the far left
+      { "<leader>qs", "<C-w><CR><C-w>L", desc = "Quickfix: open in vertical split" }, -- <C-w>L moves the new window to the far right
       { "<leader>qt", "<C-w><CR><C-w>T", desc = "Quickfix: open in new tab" }, -- <C-w>T moves the new window to its own tab
       -- Expand/collapse N lines of context around each result
       { ">", function() require("quicker").expand({ before = 2, after = 2, add_to_existing = true }) end, desc = "Quickfix: expand context" },

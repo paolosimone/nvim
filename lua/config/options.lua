@@ -19,8 +19,20 @@ if vim.env.SSH_TTY or not has_native then
     copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
     paste = { ["+"] = paste, ["*"] = paste },
   }
+  -- The OSC 52 escape sequence written on yank can interleave with nvim's own redraw
+  -- (ssh + tmux) and leave garbled cells, so force a full redraw right after each yank
+  vim.api.nvim_create_autocmd("TextYankPost", {
+    callback = function() vim.schedule(function() vim.cmd("redraw!") end) end,
+  })
 end
 
+-- `nvim ./bar` with a single directory argument: make it the cwd, so shell commands,
+-- terminals, pickers and the project-local .nvim.lua (exrc) all target it
+if vim.fn.argc() == 1 and vim.fn.isdirectory(vim.fn.argv(0)) == 1 then
+  vim.cmd.cd(vim.fn.fnameescape(vim.fn.argv(0)))
+end
+
+vim.o.exrc = true -- Load project-local .nvim.lua (asks for trust on first use)
 vim.o.timeout = true -- Combination timeout
 vim.o.timeoutlen = 1000
 vim.opt.autoread = true -- Enable auto-read when a file is changed from the outside

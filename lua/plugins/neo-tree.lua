@@ -72,8 +72,8 @@ return {
     filesystem = {
       window = {
         mappings = {
-          ["."] = "set_root",
-          ["H"] = "toggle_hidden",
+          ["O"] = "set_root",
+          ["."] = "toggle_hidden",
           ["/"] = "fuzzy_finder",
           ["i"] = "show_file_details", -- see `:h neo-tree-file-actions` for options to customize the window.
         },

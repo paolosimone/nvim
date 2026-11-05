@@ -51,6 +51,20 @@ return {
         pcall(vim.keymap.del, 'n', '<C-w>d', { buffer = event.buf })
 
         map("<leader>kk", vim.lsp.buf.definition, "Code: go to definition")
+        -- Go to definition in a new split/tab: duplicate the current window first,
+        -- then jump there (the original window stays where it was).
+        map("<leader>ks", function()
+          vim.cmd("vsplit")
+          vim.lsp.buf.definition()
+        end, "Code: go to definition in vertical split")
+        map("<leader>kS", function()
+          vim.cmd("split")
+          vim.lsp.buf.definition()
+        end, "Code: go to definition in horizontal split")
+        map("<leader>kt", function()
+          vim.cmd("tab split")
+          vim.lsp.buf.definition()
+        end, "Code: go to definition in new tab")
         map("<leader>kl", vim.lsp.buf.references, "Code: list references")
         map("<leader>ki", vim.lsp.buf.hover, "Code: hover documentation")
         map("<leader>kd", vim.diagnostic.open_float, "Code: line diagnostics")
