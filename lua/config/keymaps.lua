@@ -61,7 +61,7 @@ vim.keymap.set("n", "<leader>o", function()
   vim.ui.open(vim.fn.expand("<cfile>"))
 end, { desc = "Edit: open link under cursor" })
 
-vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'File: explorer' })
+vim.keymap.set('n', '<leader>e', ':Neotree filesystem reveal toggle<CR>', { desc = 'File: explorer' })
 
 
 -- Editing
